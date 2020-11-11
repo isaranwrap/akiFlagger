@@ -14,12 +14,13 @@
 #' @import zoo
 #' @importFrom dplyr select
 #' @importFrom dplyr group_by
+#' @importFrom dplyr between
 #' @importFrom dplyr mutate
 #' @importFrom dplyr %>%
 #'
 #' @importFrom data.table fread
-#' @importFrom data.table last
 #' @importFrom data.table first
+#' @importFrom data.table last
 #' @importFrom data.table copy
 #' @importFrom data.table :=
 #' @importFrom data.table .SD
@@ -41,8 +42,8 @@ addRollingWindowAKI <- function(dataframe, window1 = as.difftime(2, units='days'
 
   df <- dataframe %>% group_by(patient_id) %>%
     mutate(
-      min_creat48 = sapply(time, function(x) min(creatinine[zoo::between(time, x - window1, x)])), # Find minimum creatinine in the past 2 days
-      min_creat7d = sapply(time, function(x) min(creatinine[zoo::between(time, x - window2, x)])), # Find minimum creatinine in the past 7 days
+      min_creat48 = sapply(time, function(x) min(creatinine[between(time, x - window1, x)])), # Find minimum creatinine in the past 2 days
+      min_creat7d = sapply(time, function(x) min(creatinine[between(time, x - window2, x)])), # Find minimum creatinine in the past 7 days
 
       condition1 = creatinine >= min_creat48 + 0.3, # Check if the creat jumps by 0.3; aka KDIGO criterion 1
       condition2 = round(creatinine, digits=4) >= round(1.5*min_creat7d, digits=4), # Check if the creat jumps by 50%; aka KDIGO criterion 2
