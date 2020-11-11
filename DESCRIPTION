@@ -2,11 +2,16 @@ Package: akiFlagger
 Title: Flags Acute Kidney Injury (AKI) 
 Version: 0.1.0
 Authors@R: 
-    person(given = "Ishan",
+    c(person(given = "Ishan",
            family = "Saran",
            role = c("aut", "cre"),
            email = "ishansaran65@gmail.com",
-           )
+           ),
+    person(given = "Shivam",
+           family = "Saran",
+           role = "aut",
+           email = "shivampsaran@gmail.com"))
+Maintainer: Ishan Saran <ishansaran65@gmail.com>
 Description: Flagger to detect acute kidney injury (AKI) in a patient dataset.
 License: MIT + file LICENSE
 Encoding: UTF-8
